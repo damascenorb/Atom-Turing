@@ -2,90 +2,65 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Orçamento — AtomTuring</title>
 <meta name="description" content="Peça um orçamento sem compromisso pelo WhatsApp, Direct do Instagram, e-mail ou formulário.">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#fbfbfd">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="AtomTuring">
 <meta property="og:title" content="Orçamento — AtomTuring">
 <meta property="og:description" content="Peça um orçamento sem compromisso pelo WhatsApp, Direct do Instagram, e-mail ou formulário.">
-<meta name="twitter:card" content="summary">
 <link rel="icon" type="image/png" href="assets/favicon.png">
-<link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/azeret-mono.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/effects.css">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="stylesheet" href="css/site.css">
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
-<header class="nav" id="nav">
-  <div class="wrap nav__in">
-    <a class="brand" href="index.html" aria-label="AtomTuring — início"><img src="assets/logos/logo-simbolo-120.png" alt="" width="37" height="30"><span>Atom<b>Turing</b></span></a>
-    <nav class="nav__links" id="menu" aria-label="Principal"><a href="index.html">Início</a><a href="computadores.html">Computadores</a><a href="redes.html">Redes & Wi-Fi</a><a href="empresas.html">Empresas</a><a href="como-funciona.html">Como funciona</a></nav>
-    <div class="nav__right">
-      <a class="btn btn--sm" href="orcamento.html">Pedir orçamento</a>
-      <button class="nav__toggle" type="button" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false"><span></span><span></span></button>
-    </div>
+<header class="nav" id="top">
+  <div class="nav__in">
+    <a class="nav__brand" href="index.html" aria-label="AtomTuring, página inicial"><img src="assets/logos/logo-lockup-320.png" alt="AtomTuring" width="320" height="186"></a>
+    <nav class="nav__links" id="menu" aria-label="Principal"><a href="index.html">Início</a><a href="computadores.html">Computadores</a><a href="redes.html">Redes e Wi-Fi</a><a href="empresas.html">Empresas</a><a href="como-funciona.html">Como funciona</a><a href="orcamento.html" aria-current="page">Orçamento</a></nav>
+    <a class="nav__cta" href="https://wa.me/5511945498733?text=Ol%C3%A1%2C%20AtomTuring!%20Quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">WhatsApp<span class="sr-only"> (abre em nova aba)</span></a>
+    <button class="burger" type="button" aria-label="Abrir menu" aria-controls="menu" aria-expanded="false"><span></span><span></span></button>
   </div>
 </header>
 <main id="conteudo" tabindex="-1">
 
-<section class="sec" id="formulario">
-  <div class="wrap quote">
-    <div>
-      <img class="quote__logo" src="assets/logos/logo-lockup-320.png" alt="AtomTuring" width="150" height="87">
-      <span class="eyebrow">Orçamento sem compromisso</span>
-      <h1 class="h-lg">Peça seu orçamento.</h1>
-      <p class="lead" style="margin-top:20px">Fale pelo WhatsApp ou pelo Direct do Instagram. Se preferir, envie o formulário: abrimos o seu e-mail com a mensagem pronta.</p>
-      <div class="row-cta"><a class="btn" href="https://wa.me/5511945498733?text=Ol%C3%A1%2C%20AtomTuring!%20Quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">Chamar no WhatsApp<span class="sr-only"> (abre em nova aba)</span></a></div>
-      <ul class="contacts">
-        <li><small>WhatsApp</small><a href="https://wa.me/5511945498733?text=Ol%C3%A1%2C%20AtomTuring!%20Quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">(11) 94549-8733<span class="sr-only"> (abre em nova aba)</span></a></li>
-        <li><small>Instagram (Direct)</small><a href="https://instagram.com/Atomturing" target="_blank" rel="noopener">@Atomturing<span class="sr-only"> (abre em nova aba)</span></a></li>
-        <li><small>E-mail</small><a href="mailto:contato.atomturing@gmail.com">contato.atomturing@gmail.com</a></li>
-        <li><small>CNPJ</small>67.771.856/0001-31</li>
-      </ul>
-    </div>
-    <form class="form" id="form" novalidate>
-      <label class="f"><span>Seu nome</span><input type="text" name="nome" autocomplete="name" required aria-required="true" aria-describedby="err"></label>
-      <label class="f"><span>Telefone ou WhatsApp</span><input type="tel" name="tel" autocomplete="tel" inputmode="tel"></label>
-      <fieldset class="f">
-        <legend>O que você precisa?</legend>
-        <div class="opts" id="opts">
-          <label><input type="checkbox" name="s" value="Manutenção preventiva e corretiva"><span>Manutenção preventiva e corretiva</span></label>
-          <label><input type="checkbox" name="s" value="Limpeza"><span>Limpeza</span></label>
-          <label><input type="checkbox" name="s" value="Formatação"><span>Formatação</span></label>
-          <label><input type="checkbox" name="s" value="Atualização e otimização"><span>Atualização e otimização</span></label>
-          <label><input type="checkbox" name="s" value="Troca de peças"><span>Troca de peças</span></label>
-          <label><input type="checkbox" name="s" value="Configuração"><span>Configuração</span></label>
-          <label><input type="checkbox" name="s" value="Rede cabeada"><span>Rede cabeada</span></label>
-          <label><input type="checkbox" name="s" value="Wi-Fi"><span>Wi-Fi</span></label>
-          <label><input type="checkbox" name="s" value="Acompanhamento"><span>Acompanhamento</span></label>
-          <label><input type="checkbox" name="s" value="Pacote empresarial"><span>Pacote empresarial</span></label>
-        </div>
-      </fieldset>
-      <label class="f"><span>Detalhes</span><textarea name="msg" rows="4" placeholder="Modelo do equipamento, o que acontece, onde fica a rede…"></textarea></label>
-      <p class="form__err" id="err" role="alert" hidden>Escreva seu nome para continuar.</p>
-      <button class="btn btn--block" type="submit">Enviar por e-mail</button>
-    </form>
+<section class="sec" id="formulario"><div class="formgrid">
+  <div>
+    <h1 class="page-title">Peça seu orçamento.</h1>
+    <p class="lede">Orçamento sem compromisso. Fale pelo WhatsApp ou pelo Direct do Instagram. Se preferir, envie o formulário: abrimos o seu e-mail com a mensagem pronta.</p>
+    <p style="margin-top:28px"><a class="pill" href="https://wa.me/5511945498733?text=Ol%C3%A1%2C%20AtomTuring!%20Quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">Chamar no WhatsApp<span class="sr-only"> (abre em nova aba)</span></a></p>
+    <dl class="contacts">
+      <div><dt>WhatsApp</dt><dd><a href="https://wa.me/5511945498733?text=Ol%C3%A1%2C%20AtomTuring!%20Quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">(11) 94549-8733<span class="sr-only"> (abre em nova aba)</span></a></dd></div>
+      <div><dt>Instagram (Direct)</dt><dd><a href="https://instagram.com/Atomturing" target="_blank" rel="noopener">@Atomturing<span class="sr-only"> (abre em nova aba)</span></a></dd></div>
+      <div><dt>E-mail</dt><dd><a href="mailto:contato.atomturing@gmail.com">contato.atomturing@gmail.com</a></dd></div>
+      <div><dt>CNPJ</dt><dd>67.771.856/0001-31</dd></div>
+    </dl>
   </div>
-</section>
+  <form class="form" id="form" novalidate>
+    <label class="f"><span>Seu nome</span><input type="text" name="nome" autocomplete="name" required aria-required="true" aria-describedby="err"></label>
+    <label class="f"><span>Telefone ou WhatsApp</span><input type="tel" name="tel" autocomplete="tel" inputmode="tel"></label>
+    <fieldset class="f"><legend>O que você precisa?</legend><div class="opts" id="opts"><label><input type="checkbox" name="s" value="Manutenção preventiva e corretiva"><span>Manutenção preventiva e corretiva</span></label><label><input type="checkbox" name="s" value="Limpeza"><span>Limpeza</span></label><label><input type="checkbox" name="s" value="Formatação"><span>Formatação</span></label><label><input type="checkbox" name="s" value="Atualização e otimização"><span>Atualização e otimização</span></label><label><input type="checkbox" name="s" value="Troca de peças"><span>Troca de peças</span></label><label><input type="checkbox" name="s" value="Configuração"><span>Configuração</span></label><label><input type="checkbox" name="s" value="Rede cabeada"><span>Rede cabeada</span></label><label><input type="checkbox" name="s" value="Wi-Fi"><span>Wi-Fi</span></label><label><input type="checkbox" name="s" value="Acompanhamento"><span>Acompanhamento</span></label><label><input type="checkbox" name="s" value="Pacote empresarial"><span>Pacote empresarial</span></label></div></fieldset>
+    <label class="f"><span>Detalhes</span><textarea name="msg" rows="4" placeholder="Modelo do equipamento, o que acontece, onde fica a rede…"></textarea></label>
+    <p class="err" id="err" role="alert" hidden>Escreva seu nome para continuar.</p>
+    <button class="pill" type="submit">Enviar por e-mail</button>
+  </form>
+</div></section>
 </main>
 <footer class="foot">
-  <div class="wrap">
-    <div class="foot__stamp"><span><b>+</b> AtomTuring · Manutenção e suporte</span><span>São Paulo, SP · 23.55°S 46.63°W · <b id="clock">--:--:--</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21l-1.4-1.3C5.4 15 2 12 2 8.5 2 5.4 4.4 3 7.5 3c1.7 0 3.4.8 4.5 2.1C13.1 3.8 14.8 3 16.5 3 19.6 3 22 5.4 22 8.5c0 3.5-3.4 6.5-8.6 11.2L12 21z"/></svg></span></div>
+  <div class="foot__in">
+    <p class="foot__note">Orçamento sem compromisso. Valores do pacote empresarial sob consulta; peças cobradas à parte. Fale pelo WhatsApp (11) 94549-8733 ou pelo Direct do Instagram @Atomturing.</p>
     <div class="foot__grid">
-      <div><img class="foot__logo" src="assets/logos/lockup-t-320.png" alt="AtomTuring" width="150" height="87"><p>Manutenção de computadores e redes, com suporte contínuo para você e sua empresa.</p></div>
-      <div><p class="foot__h">Páginas</p><ul><li><a href="index.html">Início</a></li><li><a href="computadores.html">Computadores</a></li><li><a href="redes.html">Redes &amp; Wi-Fi</a></li><li><a href="empresas.html">Pacote empresarial</a></li><li><a href="como-funciona.html">Como funciona</a></li><li><a href="orcamento.html">Orçamento</a></li></ul></div>
-      <div><p class="foot__h">Serviços</p><ul><li>Manutenção preventiva e corretiva</li><li>Formatação e limpeza</li><li>Troca de peças</li><li>Rede cabeada e Wi-Fi</li><li>Acompanhamento</li><li>Pacote empresarial</li></ul></div>
-      <div><p class="foot__h">Contato</p><ul><li><a href="https://wa.me/5511945498733?text=Ol%C3%A1%2C%20AtomTuring!%20Quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">WhatsApp (11) 94549-8733<span class="sr-only"> (abre em nova aba)</span></a></li><li><a href="mailto:contato.atomturing@gmail.com">contato.atomturing@gmail.com</a></li><li><a href="https://instagram.com/Atomturing" target="_blank" rel="noopener">Instagram @Atomturing<span class="sr-only"> (abre em nova aba)</span></a></li></ul></div>
+      <div><p class="foot__h">Páginas</p><ul><li><a href="index.html">Início</a></li><li><a href="computadores.html">Computadores</a></li><li><a href="redes.html">Redes e Wi-Fi</a></li><li><a href="empresas.html">Empresas</a></li><li><a href="como-funciona.html">Como funciona</a></li></ul></div>
+      <div><p class="foot__h">Serviços</p><ul><li>Manutenção preventiva e corretiva</li><li>Formatação e limpeza</li><li>Troca de peças</li><li>Rede cabeada e Wi-Fi</li><li>Acompanhamento</li></ul></div>
+      <div><p class="foot__h">Para empresas</p><ul><li><a href="empresas.html">Pacote empresarial</a></li><li><a href="empresas.html#monte">Monte o seu pacote</a></li><li><a href="orcamento.html">Consultar valores</a></li></ul></div>
+      <div><p class="foot__h">Contato</p><ul><li><a href="https://wa.me/5511945498733?text=Ol%C3%A1%2C%20AtomTuring!%20Quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">WhatsApp<span class="sr-only"> (abre em nova aba)</span></a></li><li><a href="mailto:contato.atomturing@gmail.com">E-mail</a></li><li><a href="https://instagram.com/Atomturing" target="_blank" rel="noopener">Instagram<span class="sr-only"> (abre em nova aba)</span></a></li><li><a href="orcamento.html">Orçamento</a></li></ul></div>
     </div>
-    <div class="foot__bar"><span>© 2026 AtomTuring · CNPJ 67.771.856/0001-31</span><span>Fotos: Unsplash</span></div>
+    <div class="foot__bar"><p>© 2026 AtomTuring. CNPJ 67.771.856/0001-31.</p><p><span>Fotos: Unsplash</span><a href="orcamento.html">Contato</a></p></div>
   </div>
 </footer>
-<script src="js/script.js" defer></script>
-<script src="js/effects.js" defer></script>
+<script src="js/site.js" defer></script>
 </body>
 </html>
