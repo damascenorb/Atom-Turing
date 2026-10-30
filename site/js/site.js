@@ -51,4 +51,26 @@
       window.open(WA + encodeURIComponent(txt), '_blank', 'noopener');
     });
   }
+
+  // movimento: entrada dos textos e leve paralaxe das fotos
+  if (!still) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
+    $$('.rv').forEach((el) => io.observe(el));
+    const imgs = $$('.tile__img img');
+    let tick = false;
+    const par = () => {
+      tick = false;
+      const vh = innerHeight;
+      imgs.forEach((im) => {
+        const r = im.parentElement.getBoundingClientRect();
+        if (r.bottom < -100 || r.top > vh + 100) return;
+        const p = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2);
+        im.style.setProperty('--py', (Math.max(-1, Math.min(1, p)) * -4.5).toFixed(2) + '%');
+      });
+    };
+    addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(par); } }, { passive: true });
+    addEventListener('resize', par); par();
+  } else {
+    $$('.rv').forEach((el) => el.classList.add('in'));
+  }
 })();
