@@ -20,6 +20,7 @@ if (form) {
     e.preventDefault();
     const nome = form.nome.value.trim(), err = $('#err');
     err.hidden = !!nome;
+    form.nome.setAttribute('aria-invalid', nome ? 'false' : 'true');
     if (!nome) { form.nome.focus(); return; }
     const serv = $$('input[name=s]:checked', form).map((x) => x.value);
     const body = [
