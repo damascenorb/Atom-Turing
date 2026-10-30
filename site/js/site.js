@@ -8,7 +8,7 @@
   const top = $('#top'), burger = $('.burger');
   if (burger) {
     burger.addEventListener('click', () => { const o = top.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
-    $$('.menu a').forEach((a) => a.addEventListener('click', () => { top.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }));
+    $$('.nav__links a').forEach((a) => a.addEventListener('click', () => { top.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }));
     addEventListener('keydown', (e) => { if (e.key === 'Escape' && top.classList.contains('open')) { top.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } });
   }
 
