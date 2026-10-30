@@ -29,7 +29,7 @@
   const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*';
   const scramble = (el) => {
     const finalText = el.dataset.text || el.textContent;
-    el.dataset.text = finalText; el.setAttribute('aria-label', finalText);
+    el.dataset.text = finalText;
     if (still) { el.textContent = finalText; return; }
     const start = performance.now(), dur = 900;
     const tick = (t) => {
@@ -66,8 +66,8 @@
       bar.style.transform = `translateX(${p * (100 / size - 100)}%)`;
       prev.disabled = rail.scrollLeft < 4; next.disabled = rail.scrollLeft > max - 4;
     };
-    prev.onclick = () => rail.scrollBy({ left: -step(), behavior: 'smooth' });
-    next.onclick = () => rail.scrollBy({ left: step(), behavior: 'smooth' });
+    prev.onclick = () => rail.scrollBy({ left: -step(), behavior: still ? 'auto' : 'smooth' });
+    next.onclick = () => rail.scrollBy({ left: step(), behavior: still ? 'auto' : 'smooth' });
     rail.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
     addEventListener('resize', update); update();
     let down = false, sx = 0, sl = 0, moved = false;
@@ -85,13 +85,13 @@
     tick(); setInterval(tick, 1000);
   }
 
-  // ---- teclas de atalho (W = WhatsApp, O = orçamento)
-  const keys = { w: () => window.open(WA + encodeURIComponent('Olá, AtomTuring! Quero um orçamento.'), '_blank', 'noopener'), o: () => { location.href = 'orcamento.html'; } };
+  // ---- atalhos de teclado: Alt+W (WhatsApp) e Alt+O (orçamento). Com Alt, para não atrapalhar quem digita ou usa leitor de tela (WCAG 2.1.4)
+  const keys = { KeyW: ['w', () => window.open(WA + encodeURIComponent('Olá, AtomTuring! Quero um orçamento.'), '_blank', 'noopener')], KeyO: ['o', () => { location.href = 'orcamento.html'; }] };
   addEventListener('keydown', (e) => {
-    if (e.metaKey || e.ctrlKey || e.altKey || /input|textarea|select/i.test(e.target.tagName)) return;
-    const k = e.key.toLowerCase();
-    $$('.kbd[data-key]').forEach((el) => el.dataset.key === k && el.classList.add('on'));
-    if (keys[k] && $$('.kbd[data-key="' + k + '"]').length) keys[k]();
+    if (!e.altKey || e.metaKey || e.ctrlKey || /input|textarea|select/i.test(e.target.tagName) || !keys[e.code]) return;
+    e.preventDefault();
+    $$('.kbd[data-key="' + keys[e.code][0] + '"]').forEach((el) => el.classList.add('on'));
+    keys[e.code][1]();
   });
   addEventListener('keyup', () => $$('.kbd.on').forEach((el) => el.classList.remove('on')));
 

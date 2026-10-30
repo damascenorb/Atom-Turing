@@ -55,7 +55,7 @@ h1,h2,h3,.display,.brand,.n,.big-steps h3{font-family:var(--display)}
 .rail-bar{flex:1;height:2px;background:rgba(127,140,170,.3);border-radius:2px;overflow:hidden}
 .rail-bar i{display:block;height:100%;width:20%;background:var(--tint);border-radius:2px;transform-origin:left;transition:transform .15s linear}
 .rail-btn{width:46px;height:46px;border-radius:50%;border:1px solid rgba(127,140,170,.45);background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:grid;place-items:center;cursor:pointer;color:inherit;transition:background-color .2s,transform .16s var(--ease)}
-.rail-btn:active{transform:scale(.94)}
+.rail-btn:active{transform:scale(.96)}
 .rail-btn:disabled{opacity:.35;cursor:default}
 .rail-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 @media (hover:hover){
@@ -217,4 +217,19 @@ em{font-family:inherit;font-style:normal;font-size:1em;letter-spacing:inherit;li
 @media (prefers-reduced-motion:reduce){
 .hero__fx .wm,.orbits,.orbits .o2{animation:none!important}
 .hero__fx .px{transition:none}
+}
+
+/* ================= acessibilidade e acabamento (revisão com skills) ================= */
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:12px;top:-64px;z-index:100;padding:12px 18px;border-radius:10px;background:var(--ink);color:#fff;font-weight:500;transition:top .2s}
+.skip:focus{top:12px}
+main:focus{outline:none}
+.ticket__title{font-family:var(--display);font-size:clamp(26px,3vw,36px);line-height:1.05;letter-spacing:-.03em;margin-bottom:22px;font-weight:500}
+p,li,.lead{text-wrap:pretty}
+.foot li a{display:inline-block;padding:7px 0}
+.f input[aria-invalid=true]{border-color:#c0262d}
+@media (max-width:700px){
+  .agrad i{animation:none;filter:blur(48px)}
+  .blobs i{animation:none;filter:blur(48px)}
+  .hero__fx .wm{animation:none}
 }
