@@ -24,6 +24,18 @@
     addEventListener('resize', update); update();
   }
 
+  // abertura: escolha do problema -> solução + link de agendamento
+  const pick = $('#pick');
+  if (pick) {
+    const sols = $$('.sol__i', pick), go = $('#pick-go');
+    const show = () => {
+      const c = $('input[name=p]:checked', pick);
+      sols.forEach((s) => { s.hidden = s.dataset.i !== c.dataset.i; });
+      go.href = 'agendar.html?s=' + encodeURIComponent(c.value) + '#agendar';
+    };
+    pick.addEventListener('change', show); show();
+  }
+
   // formulário de orçamento -> e-mail pronto
   const form = $('#form');
   if (form) {
@@ -77,7 +89,7 @@
   if (!still) {
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
     $$('.rv').forEach((el) => io.observe(el));
-    const imgs = $$('.tile__img img');
+    const imgs = $$('.ph img');
     let tick = false;
     const par = () => {
       tick = false;
@@ -86,7 +98,7 @@
         const r = im.parentElement.getBoundingClientRect();
         if (r.bottom < -100 || r.top > vh + 100) return;
         const p = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2);
-        im.style.setProperty('--py', (Math.max(-1, Math.min(1, p)) * -4.5).toFixed(2) + '%');
+        im.style.setProperty('--py', (Math.max(-1, Math.min(1, p)) * -4).toFixed(2) + '%');
       });
     };
     addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(par); } }, { passive: true });
