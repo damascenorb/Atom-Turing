@@ -41,6 +41,27 @@
     });
   }
 
+  // agendamento -> WhatsApp com mensagem pronta
+  const ag = $('#ag');
+  if (ag) {
+    const wanted = (new URLSearchParams(location.search).get('s') || '').split(',');
+    $$('#aopts input').forEach((o) => { o.checked = wanted.includes(o.value); });
+    const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+    ag.dia.min = d.toISOString().slice(0, 10);
+    ag.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nome = ag.nome.value.trim(), err = $('#aerr');
+      err.hidden = !!nome;
+      ag.nome.setAttribute('aria-invalid', nome ? 'false' : 'true');
+      if (!nome) { ag.nome.focus(); return; }
+      const serv = $$('input[name=s]:checked', ag).map((x) => x.value);
+      const dia = ag.dia.value && ag.dia.value.split('-').reverse().join('/');
+      const per = $('input[name=per]:checked', ag).value;
+      const txt = ['Olá, AtomTuring! Quero agendar um atendimento.', `Meu nome é ${nome}.`, serv.length && `Preciso de: ${serv.join(', ')}.`, dia && `Melhor dia: ${dia}.`, per !== 'Combinar na conversa' && `Período: ${per}.`, ag.msg.value.trim() && `Detalhes: ${ag.msg.value.trim()}`].filter(Boolean).join('\n');
+      window.open(WA + encodeURIComponent(txt), '_blank', 'noopener');
+    });
+  }
+
   // pacote empresarial -> WhatsApp (sem preço)
   const pk = $('#pkg');
   if (pk) {
