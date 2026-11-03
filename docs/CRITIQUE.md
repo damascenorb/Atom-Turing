@@ -35,6 +35,6 @@ Direção clara e profissional: telas grandes, foto de pessoa trabalhando e tít
 - Formulários simples, com resposta por WhatsApp ou e-mail.
 
 ## Prioridades abertas
-1. **Prova social:** não há depoimentos nem casos. Só incluir com conteúdo real do cliente.
+1. **Prova social:** adicionada a seção "Por que a AtomTuring" com fatos verificáveis (CNPJ, orçamento sem compromisso, suporte) e link do Instagram. Depoimentos de clientes não foram inventados.
 2. **Foto de Wi-Fi** (letreiro) é a mais fraca; trocar por foto de roteador/ponto de acesso.
 3. **Fotos próprias** da AtomTuring no lugar das de banco de imagens.
