@@ -128,18 +128,18 @@ pin = f'''<section class="pin dark" id="solucoes" style="--n:{N}" aria-label="Es
 <script id="pdata" type="application/json">{pjson}</script>
 '''
 
-hero = f'''<section class="hero dark"><div class="wrap hero__in">
+hero = f'''<section class="hero dark"><div class="wrap"><div class="hero__in glass">
   <div class="hero__txt">
     <h1 class="code rise"><span class="c" aria-hidden="true">$</span> Problema com <span class="word" id="word" data-words="o computador|o notebook|o Wi‑Fi|a rede|a internet">o computador</span>?<span class="cur" aria-hidden="true"></span></h1>
     <p class="lead rise">Manutenção de computadores e redes. Veja a solução para o seu caso e agende o atendimento. Orçamento sem compromisso.</p>
     <div class="btns rise"><a class="btn" href="agendar.html">Agendar atendimento</a><a class="btn btn--ghost" href="#solucoes">Ver a solução</a></div>
   </div>
   <div class="orbit rise" aria-label="Serviços ligados à AtomTuring">
-    <svg class="orbit__svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="50" y1="50" x2="15" y2="17"/><line x1="50" y1="50" x2="85" y2="17"/><line x1="50" y1="50" x2="15" y2="83"/><line x1="50" y1="50" x2="85" y2="83"/><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="42"/></svg>
+    <svg class="orbit__svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="50" y1="50" x2="15" y2="17"/><line x1="50" y1="50" x2="85" y2="17"/><line x1="50" y1="50" x2="15" y2="83"/><line x1="50" y1="50" x2="85" y2="83"/></svg>
     <img class="orbit__logo" src="assets/logos/simbolo-520.png" width="520" height="401" alt="Símbolo da AtomTuring">
     <a class="node n1" href="computadores.html">Computadores</a><a class="node n2" href="redes.html">Redes</a><a class="node n3" href="agendar.html?s=Wi-Fi#agendar">Wi‑Fi</a><a class="node n4" href="empresas.html">Empresas</a>
   </div>
-</div></section>
+</div></div></section>
 '''
 
 STEP3 = [("conversa", "Você conta o que acontece, pelo WhatsApp, Direct ou formulário."), ("agenda", "Manhã, tarde ou noite. Confirmamos o horário pelo WhatsApp."), ("resolve", "Diagnóstico, conserto e suporte depois do serviço. Orçamento antes de decidir.")]
