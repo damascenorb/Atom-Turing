@@ -101,7 +101,7 @@
       imgs.forEach((im, k) => im.classList.toggle('on', k === i));
       ticks.forEach((t, k) => t.classList.toggle('on', k === i));
       btnsL.forEach((b, k) => b.setAttribute('aria-current', k === i));
-      pt.innerHTML = '<span class="c" aria-hidden="true">&gt;</span> ' + d.t; ps.textContent = d.d; ptag.textContent = d.tag; pcap.textContent = d.p + '.jpg';
+      pt.innerHTML = '<span class="c" aria-hidden="true">&gt;</span> ' + d.t; ps.textContent = d.d; ptag.textContent = d.tag; pcap.textContent = d.tag;
       pgo.href = 'agendar.html?s=' + encodeURIComponent(d.g) + '#agendar'; place();
     };
     const onScroll = () => {
