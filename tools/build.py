@@ -135,7 +135,7 @@ hero = f'''<section class="hero dark"><div class="wrap hero__in">
     <div class="btns rise"><a class="btn" href="agendar.html">Agendar atendimento</a><a class="btn btn--ghost" href="#solucoes">Ver a solução</a></div>
   </div>
   <div class="orbit rise" aria-label="Serviços ligados à AtomTuring">
-    <svg class="orbit__svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="50" y1="50" x2="12" y2="14"/><line x1="50" y1="50" x2="88" y2="14"/><line x1="50" y1="50" x2="10" y2="86"/><line x1="50" y1="50" x2="90" y2="86"/></svg>
+    <svg class="orbit__svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="50" y1="50" x2="15" y2="17"/><line x1="50" y1="50" x2="85" y2="17"/><line x1="50" y1="50" x2="15" y2="83"/><line x1="50" y1="50" x2="85" y2="83"/><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="42"/></svg>
     <img class="orbit__logo" src="assets/logos/simbolo-520.png" width="520" height="401" alt="Símbolo da AtomTuring">
     <a class="node n1" href="computadores.html">Computadores</a><a class="node n2" href="redes.html">Redes</a><a class="node n3" href="agendar.html?s=Wi-Fi#agendar">Wi‑Fi</a><a class="node n4" href="empresas.html">Empresas</a>
   </div>
@@ -143,7 +143,7 @@ hero = f'''<section class="hero dark"><div class="wrap hero__in">
 '''
 
 STEP3 = [("conversa", "Você conta o que acontece, pelo WhatsApp, Direct ou formulário."), ("agenda", "Manhã, tarde ou noite. Confirmamos o horário pelo WhatsApp."), ("resolve", "Diagnóstico, conserto e suporte depois do serviço. Orçamento antes de decidir.")]
-steps = f'''<section class="light"><div class="wrap">{h("h2", "Do problema ao computador funcionando.")}<div class="term3 rv">''' + "".join(f'<div class="term"><p class="term__b"><span class="c">$</span> {a}</p><p>{b}</p></div>' for a, b in STEP3) + '</div></div></section>\n'
+steps = f'''<section class="steps"><div class="wrap">{h("h2", "Do problema ao computador funcionando.")}<div class="term3 rv">''' + "".join(f'<div class="term"><p class="term__b"><span class="c">$</span> {a}</p><p>{b}</p></div>' for a, b in STEP3) + '</div></div></section>\n'
 
 def svc(tag, title, items, photo, alt, links):
     li = "".join(f"<li>{x}</li>" for x in items)
