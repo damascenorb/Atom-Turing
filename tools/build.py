@@ -82,7 +82,7 @@ def h(tag, text, cls=""):
 
 
 def top(title, lead, items, photo=None, alt=""):
-    ph = f'<figure class="frame rv">{img(photo, alt, True)}<figcaption>{photo}.jpg</figcaption></figure>' if photo else ""
+    ph = f'<figure class="frame rv">{img(photo, alt, True)}</figure>' if photo else ""
     return f'<section class="top dark{" top--solo" if not photo else ""}"><div class="wrap top__in"><div class="top__txt rv">{h("h1", title)}<p class="lead">{lead}</p>{btns(items)}</div>{ph}</div></section>\n'
 
 
@@ -121,7 +121,7 @@ pin = f'''<section class="pin dark" id="solucoes" style="--n:{N}" aria-label="Es
       <p class="pin__tag"><span id="ptag">{PROBS[0][5]}</span></p>
       <div class="btns"><a class="btn" id="pgo" href="agendar.html?s={quote(PROBS[0][2])}#agendar">Agendar este atendimento</a></div></div>
     </div>
-    <div class="pin__m"><div class="pin__img">{pimgs}<span class="pin__scan" aria-hidden="true"></span><span class="pin__cap" id="pcap" aria-hidden="true">pc-lento.jpg</span></div><div class="pin__ticks" aria-hidden="true">{pticks}</div></div>
+    <div class="pin__m"><div class="pin__img">{pimgs}<span class="pin__scan" aria-hidden="true"></span><span class="pin__cap" id="pcap" aria-hidden="true">{PROBS[0][5]}</span></div><div class="pin__ticks" aria-hidden="true">{pticks}</div></div>
     <span class="pin__wire" id="wire" aria-hidden="true"></span>
   </div></div>
 </section>
@@ -135,7 +135,7 @@ hero = f'''<section class="hero dark"><div class="wrap hero__in">
     <div class="btns rise"><a class="btn" href="agendar.html">Agendar atendimento</a><a class="btn btn--ghost" href="#solucoes">Ver a solução</a></div>
   </div>
   <div class="orbit rise" aria-label="Serviços ligados à AtomTuring">
-    <svg class="orbit__svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="50" y1="50" x2="12" y2="14"/><line x1="50" y1="50" x2="88" y2="14"/><line x1="50" y1="50" x2="10" y2="86"/><line x1="50" y1="50" x2="90" y2="86"/></svg>
+    <svg class="orbit__svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="50" y1="50" x2="15" y2="17"/><line x1="50" y1="50" x2="85" y2="17"/><line x1="50" y1="50" x2="15" y2="83"/><line x1="50" y1="50" x2="85" y2="83"/><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="42"/></svg>
     <img class="orbit__logo" src="assets/logos/simbolo-520.png" width="520" height="401" alt="Símbolo da AtomTuring">
     <a class="node n1" href="computadores.html">Computadores</a><a class="node n2" href="redes.html">Redes</a><a class="node n3" href="agendar.html?s=Wi-Fi#agendar">Wi‑Fi</a><a class="node n4" href="empresas.html">Empresas</a>
   </div>
@@ -143,11 +143,11 @@ hero = f'''<section class="hero dark"><div class="wrap hero__in">
 '''
 
 STEP3 = [("conversa", "Você conta o que acontece, pelo WhatsApp, Direct ou formulário."), ("agenda", "Manhã, tarde ou noite. Confirmamos o horário pelo WhatsApp."), ("resolve", "Diagnóstico, conserto e suporte depois do serviço. Orçamento antes de decidir.")]
-steps = f'''<section class="light"><div class="wrap">{h("h2", "Do problema ao computador funcionando.")}<div class="term3 rv">''' + "".join(f'<div class="term"><p class="term__b"><span class="c">$</span> {a}</p><p>{b}</p></div>' for a, b in STEP3) + '</div></div></section>\n'
+steps = f'''<section class="steps"><div class="wrap">{h("h2", "Do problema ao computador funcionando.")}<div class="term3 rv">''' + "".join(f'<div class="term"><p class="term__b"><span class="c">$</span> {a}</p><p>{b}</p></div>' for a, b in STEP3) + '</div></div></section>\n'
 
 def svc(tag, title, items, photo, alt, links):
     li = "".join(f"<li>{x}</li>" for x in items)
-    return f'<article class="svc rv"><figure>{img(photo, alt)}<figcaption>{tag}</figcaption></figure><div><h3>{title}</h3><ul class="ticks">{li}</ul>{btns(links)}</div></article>'
+    return f'<article class="svc rv"><figure>{img(photo, alt)}</figure><div><h3>{title}</h3><ul class="ticks">{li}</ul>{btns(links)}</div></article>'
 
 services = f'''<section class="dark svcs"><div class="wrap">{h("h2", "Serviços")}<div class="svc3">''' \
   + svc("computadores.png", "Computadores", ["Manutenção preventiva e corretiva", "Formatação e otimização", "Limpeza interna", "Troca de peças"], "peca", "Chips sobre placa azul", [("agendar.html?s=Manuten%C3%A7%C3%A3o%20preventiva%20e%20corretiva#agendar", "Agendar"), ("computadores.html", "Detalhes")]) \
