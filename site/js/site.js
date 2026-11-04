@@ -7,33 +7,117 @@
   // menu no celular
   const top = $('#top'), burger = $('.burger');
   if (burger) {
+    const close = () => { top.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); };
     burger.addEventListener('click', () => { const o = top.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
-    $$('.nav__links a').forEach((a) => a.addEventListener('click', () => { top.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }));
-    addEventListener('keydown', (e) => { if (e.key === 'Escape' && top.classList.contains('open')) { top.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); burger.focus(); } });
+    $$('.nav__links a').forEach((a) => a.addEventListener('click', close));
+    addEventListener('keydown', (e) => { if (e.key === 'Escape' && top.classList.contains('open')) { close(); burger.focus(); } });
   }
 
-  // galeria lateral: setas
-  const rail = $('.rail');
-  if (rail) {
-    const [prev, next] = $$('.rail-btn');
-    const step = () => rail.children[0].getBoundingClientRect().width + 20;
-    const update = () => { prev.disabled = rail.scrollLeft < 4; next.disabled = rail.scrollLeft > rail.scrollWidth - rail.clientWidth - 4; };
-    prev.onclick = () => rail.scrollBy({ left: -step(), behavior: still ? 'auto' : 'smooth' });
-    next.onclick = () => rail.scrollBy({ left: step(), behavior: still ? 'auto' : 'smooth' });
-    rail.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
-    addEventListener('resize', update); update();
-  }
-
-  // abertura: escolha do problema -> solução + link de agendamento
-  const pick = $('#pick');
-  if (pick) {
-    const sols = $$('.sol__i', pick), go = $('#pick-go');
-    const show = () => {
-      const c = $('input[name=p]:checked', pick);
-      sols.forEach((s) => { s.hidden = s.dataset.i !== c.dataset.i; });
-      go.href = 'agendar.html?s=' + encodeURIComponent(c.value) + '#agendar';
+  // fundo: chuva de código azul + rede de pontos ligados
+  const cv = $('#bg');
+  if (cv) {
+    const cx = cv.getContext('2d');
+    const glyphs = '01<>{}[]/=+*#$%&;:ABCDEFabcdef0123456789'.split('');
+    let W, H, cols, drops, nodes, size = 15, raf, mx = -999, my = -999;
+    const init = () => {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      W = innerWidth; H = innerHeight;
+      cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cols = Math.ceil(W / size);
+      drops = Array.from({ length: cols }, () => Math.random() * -H / size);
+      const n = Math.round(Math.min(70, (W * H) / 26000));
+      nodes = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35 }));
+      cx.fillStyle = '#04070d'; cx.fillRect(0, 0, W, H);
+      drops = drops.map(() => Math.random() * H / size);
+      for (let k = 0; k < 70; k++) rainStep();
     };
-    pick.addEventListener('change', show); show();
+    const rainStep = () => {
+      cx.fillStyle = 'rgba(4,7,13,.1)'; cx.fillRect(0, 0, W, H);
+      cx.font = size + 'px JBMono, monospace';
+      for (let i = 0; i < cols; i++) {
+        const y = drops[i] * size;
+        cx.fillStyle = Math.random() > .95 ? 'rgba(200,245,255,.95)' : 'rgba(30,125,255,.7)';
+        cx.fillText(glyphs[(Math.random() * glyphs.length) | 0], i * size, y);
+        if (y > H && Math.random() > .975) drops[i] = 0;
+        drops[i] += .55;
+      }
+    };
+    const frame = () => {
+      rainStep();
+      cx.lineWidth = 1;
+      for (const a of nodes) {
+        a.x += a.vx; a.y += a.vy;
+        if (a.x < 0 || a.x > W) a.vx *= -1;
+        if (a.y < 0 || a.y > H) a.vy *= -1;
+        for (const b of nodes) {
+          const d = Math.hypot(a.x - b.x, a.y - b.y);
+          if (d < 130 && a < b) { cx.strokeStyle = `rgba(34,211,255,${(1 - d / 130) * .35})`; cx.beginPath(); cx.moveTo(a.x, a.y); cx.lineTo(b.x, b.y); cx.stroke(); }
+        }
+        const dm = Math.hypot(a.x - mx, a.y - my);
+        if (dm < 160) { cx.strokeStyle = `rgba(34,211,255,${(1 - dm / 160) * .6})`; cx.beginPath(); cx.moveTo(a.x, a.y); cx.lineTo(mx, my); cx.stroke(); }
+        cx.fillStyle = 'rgba(120,225,255,.85)'; cx.beginPath(); cx.arc(a.x, a.y, 1.6, 0, 6.3); cx.fill();
+      }
+      raf = requestAnimationFrame(frame);
+    };
+    init();
+    addEventListener('resize', () => { cancelAnimationFrame(raf); init(); if (!still) frame(); });
+    addEventListener('pointermove', (e) => { mx = e.clientX; my = e.clientY; }, { passive: true });
+    document.addEventListener('visibilitychange', () => { cancelAnimationFrame(raf); if (!document.hidden && !still) frame(); });
+    if (still) { frame(); cancelAnimationFrame(raf); } else frame();
+  }
+
+  // título que troca a palavra como dado decodificando
+  const word = $('#word');
+  if (word && !still) {
+    const list = word.dataset.words.split('|'), pool = '01{}<>/#$%'.split('');
+    let k = 0;
+    const swap = () => {
+      const to = list[(k = (k + 1) % list.length)];
+      let t = 0;
+      const id = setInterval(() => {
+        t++;
+        word.textContent = [...to].map((ch, i) => (i < t / 2 ? ch : ch === ' ' ? ' ' : pool[(Math.random() * pool.length) | 0])).join('');
+        if (t / 2 >= to.length) { clearInterval(id); word.textContent = to; }
+      }, 40);
+    };
+    setInterval(swap, 3200);
+  }
+
+  // seção fixa: rola a página, troca texto e foto no mesmo lugar
+  const pin = $('#solucoes');
+  if (pin) {
+    const data = JSON.parse($('#pdata').textContent);
+    const stage = $('.pin__stage', pin), imgs = $$('.pin__img img', pin), ticks = $$('.pin__ticks i', pin), btnsL = $$('#plist button');
+    const pt = $('#pt'), ps = $('#ps'), ptag = $('#ptag'), pgo = $('#pgo'), pcap = $('#pcap'), wire = $('#wire'), grid = $('.pin__grid', pin), media = $('.pin__img', pin);
+    let cur = -1;
+    const place = () => {
+      const b = btnsL[cur]; if (!b || getComputedStyle(b.parentElement.parentElement).display === 'none') { wire.style.opacity = 0; return; }
+      const g = grid.getBoundingClientRect(), r = b.getBoundingClientRect(), m = media.getBoundingClientRect();
+      wire.style.left = (r.right - g.left) + 'px'; wire.style.width = Math.max(0, m.left - r.right) + 'px'; wire.style.top = (r.top + r.height / 2 - g.top) + 'px'; wire.style.opacity = 1;
+      pin.style.setProperty('--h', (m.height - 2) + 'px');
+    };
+    const show = (i) => {
+      if (i === cur) return; cur = i; const d = data[i];
+      imgs.forEach((im, k) => im.classList.toggle('on', k === i));
+      ticks.forEach((t, k) => t.classList.toggle('on', k === i));
+      btnsL.forEach((b, k) => b.setAttribute('aria-current', k === i));
+      pt.innerHTML = '<span class="c" aria-hidden="true">&gt;</span> ' + d.t; ps.textContent = d.d; ptag.textContent = d.tag; pcap.textContent = d.p + '.jpg';
+      pgo.href = 'agendar.html?s=' + encodeURIComponent(d.g) + '#agendar'; place();
+    };
+    const onScroll = () => {
+      const rect = pin.getBoundingClientRect(), navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav')) || 56;
+      const total = pin.offsetHeight - stage.offsetHeight;
+      const p = Math.min(0.9999, Math.max(0, (navH - rect.top) / total));
+      show(Math.floor(p * data.length));
+    };
+    btnsL.forEach((b, k) => b.addEventListener('click', () => {
+      const total = pin.offsetHeight - stage.offsetHeight;
+      scrollTo({ top: pin.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav')) || 56) + (k + .5) / data.length * total, behavior: still ? 'auto' : 'smooth' });
+    }));
+    let tk = false;
+    addEventListener('scroll', () => { if (!tk) { tk = true; requestAnimationFrame(() => { tk = false; onScroll(); }); } }, { passive: true });
+    addEventListener('resize', () => { place(); onScroll(); });
+    show(0); onScroll();
   }
 
   // formulário de orçamento -> e-mail pronto
@@ -85,25 +169,9 @@
     });
   }
 
-  // movimento: entrada dos textos e leve paralaxe das fotos
+  // entrada dos blocos
   if (!still) {
-    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
     $$('.rv').forEach((el) => io.observe(el));
-    const imgs = $$('.ph img');
-    let tick = false;
-    const par = () => {
-      tick = false;
-      const vh = innerHeight;
-      imgs.forEach((im) => {
-        const r = im.parentElement.getBoundingClientRect();
-        if (r.bottom < -100 || r.top > vh + 100) return;
-        const p = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2);
-        im.style.setProperty('--py', (Math.max(-1, Math.min(1, p)) * -4).toFixed(2) + '%');
-      });
-    };
-    addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(par); } }, { passive: true });
-    addEventListener('resize', par); par();
-  } else {
-    $$('.rv').forEach((el) => el.classList.add('in'));
-  }
+  } else $$('.rv').forEach((el) => el.classList.add('in'));
 })();
