@@ -41,7 +41,7 @@
   // chuva de código (estilo matrix) em azul: leve, pausa fora da tela e com a aba escondida
   const rains = $$('[data-rain]');
   if (rains.length) {
-    const G = '01{}<>/=+-*#$%&0101ABCDEF'.split('');
+    const G = 'ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍ0101010123456789'.split('');
     const small = matchMedia('(max-width:640px)').matches;
     const SZ = small ? 16 : 15, GAP = small ? 30 : 22;
     rains.forEach((cv) => {

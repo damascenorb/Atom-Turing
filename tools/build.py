@@ -40,7 +40,7 @@ def head(file, title, desc, extra="", img="tecnico-pc"):
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
-<meta name="theme-color" content="#0a1424">
+<meta name="theme-color" content="#0b0e12">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="AtomTuring">
@@ -79,7 +79,7 @@ FAB = f'<a class="fab" href="{WA}" target="_blank" rel="noopener" aria-label="Ch
 
 def foot():
     return f'''</main>
-<footer class="foot"><div class="wrap">
+<footer class="foot"><canvas class="rain" aria-hidden="true" data-rain></canvas><div class="wrap">
   <div class="foot__top">
     <div class="foot__brand"><img src="assets/logos/lockup-t-320.png" alt="AtomTuring" width="320" height="185" loading="lazy"><p>Manutenção de computadores, redes e Wi‑Fi. Suporte para você e para a sua empresa.</p></div>
     <nav class="foot__col" aria-label="Páginas"><h2>Páginas</h2><ul><li><a href="index.html">Início</a></li><li><a href="computadores.html">Computadores</a></li><li><a href="redes.html">Redes e Wi‑Fi</a></li><li><a href="empresas.html">Empresas</a></li><li><a href="como-funciona.html">Como funciona</a></li></ul></nav>
@@ -111,7 +111,7 @@ def ems(t):
 
 def pagehead(title, lead, items, photo=None, alt="", pos=""):
     ph = f'<figure class="pagehead__ph rv">{pic(photo, alt, "(min-width:1000px) 40vw, 100vw", True, pos=pos)}</figure>' if photo else ""
-    return f'''<section class="pagehead{" pagehead--solo" if not photo else ""}"><div class="wrap pagehead__in">
+    return f'''<section class="pagehead{" pagehead--solo" if not photo else ""}"><canvas class="rain" aria-hidden="true" data-rain></canvas><div class="wrap pagehead__in">
   <div class="pagehead__txt"><h1>{ems(title)}</h1><p class="lead">{lead}</p>{btns(items, True)}</div>{ph}
 </div></section>
 '''
@@ -208,7 +208,7 @@ metodo = f'''<section class="sec" id="como"><div class="wrap split">
 '''
 
 PACK = [("Suporte técnico", "Ajuda de quem entende, sempre que a equipe precisar."), ("Atendimento de emergência", "Quando algo importante para, a empresa sabe a quem chamar."), ("Gestão de equipamentos", "Controle do que a empresa tem e em que estado cada equipamento está."), ("Manutenção", "Preventiva e corretiva nos computadores. Peças cobradas à parte."), ("Limpeza", "Limpeza interna dos equipamentos, para evitar superaquecimento."), ("Acompanhamento técnico", "Rede, sistema e hardware acompanhados de perto.")]
-empr = f'''<section class="corp" id="empresas"><div class="wrap corp__in">
+empr = f'''<section class="corp" id="empresas"><canvas class="rain" aria-hidden="true" data-rain></canvas><div class="wrap corp__in">
   <figure class="corp__ph rv">{pic("tecnico-datacenter", "Técnico conectando cabos em um rack de servidores", "(min-width:1000px) 34vw, 100vw", pos="55% 50%")}</figure>
   <div class="corp__tx rv">
     <h2>Tecnologia da empresa <em>sob controle</em>.</h2>
