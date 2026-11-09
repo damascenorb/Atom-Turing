@@ -124,7 +124,7 @@ def rows(title, lead, items, cls=""):
 
 
 def cta(title="Vamos resolver o seu problema?"):
-    return f'''<section class="cta"><img class="cta__mark" src="assets/logos/simbolo-520.png" alt="" aria-hidden="true" width="520" height="401" loading="lazy"><div class="wrap cta__in rv">
+    return f'''<section class="cta"><canvas class="rain" aria-hidden="true" data-rain></canvas><img class="cta__mark" src="assets/logos/simbolo-520.png" alt="" aria-hidden="true" width="520" height="401" loading="lazy"><div class="wrap cta__in rv">
   <h2>{ems(title)}</h2>
   <div class="cta__side"><p>Orçamento sem compromisso. Confirmamos o horário pelo WhatsApp.</p>
   <div class="btns"><a class="btn btn--paper" href="{WA}" target="_blank" rel="noopener">Pedir orçamento no WhatsApp{NB}</a><a class="btn btn--line" href="agendar.html">Agendar atendimento</a></div></div>
@@ -153,7 +153,7 @@ for k, (t, d, g, ph, al, pos) in enumerate(PROBS):
               f'<div class="prob__m">{pic(ph, al, "(min-width:1000px) 0px, 100vw", pos=pos)}</div></div></div></li>')
 pimgs = "".join(pic(ph, al, "(min-width:1000px) 46vw, 0px", False, cls="on" if k == 0 else "", pos=pos).replace("<img", f'<img data-i="{k}"', 1) for k, (t, d, g, ph, al, pos) in enumerate(PROBS))
 
-hero = f'''<section class="hero"><div class="wrap hero__in">
+hero = f'''<section class="hero"><canvas class="rain" aria-hidden="true" data-rain></canvas><div class="wrap hero__in">
   <div class="hero__txt">
     <h1>Computadores e redes <em>funcionando</em> como deveriam.</h1>
     <p class="lead">Manutenção preventiva e corretiva, formatação, limpeza e troca de peças. Rede cabeada, Wi‑Fi e suporte técnico para você e para a sua empresa.</p>
@@ -190,7 +190,7 @@ servicos = f'''<section class="sec sec--tint" id="servicos"><div class="wrap">
     {btns([("computadores.html", "Ver serviços de computadores"), ("agendar.html?s=Manuten%C3%A7%C3%A3o%20preventiva%20e%20corretiva#agendar", "Agendar atendimento")])}</div>
   </div>
 </div></section>
-<section class="band band--dark" aria-labelledby="h-redes"><div class="wrap band__in">
+<section class="band band--dark" aria-labelledby="h-redes"><canvas class="rain" aria-hidden="true" data-rain></canvas><div class="wrap band__in">
   <div class="band__tx rv"><h2 id="h-redes">Redes e <em>Wi‑Fi</em></h2><p class="lead">Conexão estável, organizada e configurada para o uso real da casa ou da empresa.</p>
   <dl class="dl dl--d">{dl(SV_R)}</dl>
   {btns([("agendar.html?s=Rede%20cabeada%2CWi-Fi#agendar", "Agendar atendimento"), ("redes.html", "Ver serviços de redes")], True)}</div>

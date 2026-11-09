@@ -38,6 +38,40 @@
     addEventListener('scroll', upd, { passive: true }); upd();
   }
 
+  // chuva de código (estilo matrix) em azul: leve, pausa fora da tela e com a aba escondida
+  const rains = $$('[data-rain]');
+  if (rains.length) {
+    const G = '01{}<>/=+-*#$%&0101ABCDEF'.split('');
+    const small = matchMedia('(max-width:640px)').matches;
+    const SZ = small ? 16 : 15, GAP = small ? 30 : 22;
+    rains.forEach((cv) => {
+      const cx = cv.getContext('2d'); let W = 0, H = 0, cols = [], run = false, last = 0, raf = 0;
+      const fit = () => {
+        const r = cv.getBoundingClientRect(); W = cv.width = Math.max(1, Math.round(r.width)); H = cv.height = Math.max(1, Math.round(r.height));
+        cx.font = `${SZ}px ui-monospace, Menlo, Consolas, monospace`;
+        cols = Array.from({ length: Math.ceil(W / GAP) }, (_, i) => ({ x: i * GAP + 4, y: Math.random() * -H, v: 0.5 + Math.random() * 0.9 }));
+      };
+      const step = () => {
+        cx.globalCompositeOperation = 'destination-out'; cx.fillStyle = 'rgba(0,0,0,.16)'; cx.fillRect(0, 0, W, H);
+        cx.globalCompositeOperation = 'source-over';
+        for (const c of cols) {
+          cx.fillStyle = Math.random() < 0.06 ? '#e8fbff' : '#22d3ff';
+          cx.fillText(G[(Math.random() * G.length) | 0], c.x, c.y);
+          c.y += SZ * c.v;
+          if (c.y > H + SZ && Math.random() > 0.975) { c.y = -SZ * 2; c.v = 0.5 + Math.random() * 0.9; }
+        }
+      };
+      const loop = (t) => { if (!run) return; raf = requestAnimationFrame(loop); if (t - last < 90) return; last = t; step(); };
+      const start = () => { if (!run && !document.hidden) { run = true; raf = requestAnimationFrame(loop); } };
+      const stop = () => { run = false; cancelAnimationFrame(raf); };
+      fit();
+      if (still) { for (let i = 0; i < 40; i++) step(); return; }
+      new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? start() : stop()))).observe(cv);
+      document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+      let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(fit, 200); });
+    });
+  }
+
   // entrada suave dos blocos (sem script, tudo aparece)
   const rv = $$('.rv');
   if (!still && 'IntersectionObserver' in window) {
